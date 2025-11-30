@@ -73,7 +73,8 @@ spec:
       value: ssd
       effect: NoSchedule
 ```
-
+For example: There are 2 nodes in a cluster and u want to upgrade them so u will do one by one , u will shift all the pods to the other nodes and then apply Noschedule rule for that particular pod and bring it down , upgrade it and then now ur node is ready and similarily u can do for other nodes too.
+  
 4. Tolerations
 
 Tolerations are applied to pods and allow them to schedule onto nodes with matching taints. They override the effect of taints.
