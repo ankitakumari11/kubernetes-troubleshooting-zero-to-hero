@@ -2,7 +2,7 @@ In Kubernetes, the scheduler is responsible for assigning pods to nodes in the c
 
 1. Node Selector
 
-Node Selector is a simple way to constrain pods to nodes with specific labels. It allows you to specify a set of key-value pairs that must match the node's labels for a pod to be scheduled on that node.
+Node Selector is a simple way to constrain pods to nodes with specific labels. It allows you to specify a set of key-value pairs that must match the node's labels for a pod to be scheduled on that node.  
 Usage: Include a nodeSelector field in the pod's YAML definition to specify the required labels.
 
 ```
@@ -11,9 +11,18 @@ spec:
     - name: my-app
     image: my-image
     nodeSelector:
-    disktype: ssd
+    node-name: arm-worker
 ```
 
+Now if the none of the nodes are having this label then the pods will not be scheduled to any of the nodes and it will cause **failed scheduling**. Check the pods status using `kubectl describe pod <pod-name` and the results below:
+<img width="975" height="469" alt="image" src="https://github.com/user-attachments/assets/dccfe7bd-916d-4604-a16b-ac8b86e8eec2" />
+
+give label to one of the node or more than 1 . 
+- `kubectl get nodes`
+- `kubectl edit node <node-name>`
+<img width="802" height="365" alt="image" src="https://github.com/user-attachments/assets/30c9153f-030f-46f3-a7d3-e0c95bf34caa" />
+
+Now u will see that the pods are assigned to that labeled node.
 2. Node Affinity
 
 Node Affinity is a more expressive way to specify rules about the placement of pods relative to nodes' labels. It allows you to specify rules that apply only if certain conditions are met.
