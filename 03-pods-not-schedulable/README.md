@@ -35,6 +35,24 @@ spec:
             - ssd
 ```
 
+Node Affinity helps you control Pod placement when you want pods to run on a specific set of nodes  
+**🔷 Types of Node Affinity**  
+**1️⃣ RequiredDuringSchedulingIgnoredDuringExecution**
+- Hard rule
+  - Scheduler must place the Pod on a matching node
+  - If no matching node exists → Pod stays pending
+- Example:
+  - "Only run on nodes labeled env=prod."  
+**2️⃣ PreferredDuringSchedulingIgnoredDuringExecution**
+- Soft rule
+  - Scheduler tries to place Pod on preferred nodes but can fall back to other nodes
+  - Pod will still run even if no nodes match
+- Example:
+  - "Prefer to run on env=prod nodes, but run anywhere if not available."
+👉 In short:  
+- Node Selector = simple + strict
+- Node Affinity = flexible + supports soft & hard rules
+  
 3. Taints
 
 Taints are applied to nodes to repel certain pods. They allow nodes to refuse pods unless the pods have a matching toleration.
