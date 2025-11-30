@@ -90,7 +90,7 @@ For example: There are 2 nodes in a cluster and u want to upgrade them so u will
 **🔹 Taint Effects&=**
 | Effect               | Meaning                                        |
 | -------------------- | ---------------------------------------------- |
-| **NoSchedule**       | Pods without toleration **won't be scheduled** |
+| **NoSchedule**       | Pods without toleration **won't be scheduled**Scheduler will not place new Pods on this node unless they have matching toleration. |
 | **PreferNoSchedule** | Try not to schedule, but not strict            |
 | **NoExecute**        | Evicts running pods without toleration         |
 
