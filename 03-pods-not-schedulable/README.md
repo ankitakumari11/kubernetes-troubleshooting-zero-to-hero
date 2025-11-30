@@ -91,8 +91,8 @@ This means:
 
 4. Tolerations
 
-Tolerations are applied to pods and allow them to schedule onto nodes with matching taints. They override the effect of taints.
-
+- Tolerations are applied to pods and allow them to schedule onto nodes with matching taints. They override the effect of taints.
+- A toleration is a setting you add in a pod's YAML that allows the pod to run on a node that has a taint.  
 Usage: Include tolerations field in the pod's YAML definition to specify which taints the pod tolerates.
 
 ```
@@ -101,8 +101,14 @@ spec:
   - name: my-app
     image: my-image
   tolerations:
-  - key: disktype
+  - key: node-name
     operator: Equal
-    value: ssd
+    value: arm-worker
     effect: NoSchedule
 ```
+This means:
+> This pod matches and tolerates the taint node-name=arm-worker:NoSchedule.
+  
+💡 Meaning:
+> - "This pod is allowed to run on nodes that have the taint node-name=arm-worker:NoSchedule."
+> - It means now this pod can be scheduled to the **node 1** as the node 1 has that label with Noschedule taint effect and except this deployment pods , other pods are not allowed to schedule on that node as they dont have tolerations inside their yaml.
