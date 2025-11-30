@@ -69,24 +69,19 @@ Taints are applied to nodes to repel certain pods. They allow nodes to refuse po
 - Taint = a rule on a node that prevents unwanted pods from scheduling on it.
 - Pods can run on that tainted node only if they have a matching toleration.  
 Usage: Use kubectl taint command to apply taints to nodes. Include tolerations field in the pod's YAML definition to tolerate specific taints.
-
+Use-case: There are 2 nodes in a cluster and u want to upgrade them so u will do one by one , u will shift all the pods to the other nodes and then apply Noschedule rule for that particular pod and bring it down , upgrade it and then now ur node is ready and similarily u can do for other nodes too.    
 ```
 kubectl taint nodes node1 node-name=arm-worker:NoSchedule
 ```
 This means:  
 > *Do NOT schedule pods on this node unless they tolerate this taint*
-```
-spec:
-    containers:
-    - name: my-app
-    image: my-image
-    tolerations:
-    - key: node-name
-      operator: Equal
-      value: arm-worker
-      effect: NoSchedule
-```
-For example: There are 2 nodes in a cluster and u want to upgrade them so u will do one by one , u will shift all the pods to the other nodes and then apply Noschedule rule for that particular pod and bring it down , upgrade it and then now ur node is ready and similarily u can do for other nodes too.  
+
+❗ Result:
+> - Pods without toleration → will NOT be scheduled on this node.
+> - Pods with matching toleration → allowed to run on this node.
+> - So u dont need to do anything in the yaml of pods , the **taint** command just restricted all the pods formation on it unless and until u add **tolerations** inisde the yaml of that particular deployment or pod.
+> - That taint says: “Do NOT schedule any pod here unless it has a matching toleration.”  
+
 **🔹 Taint Effects&=**
 | Effect               | Meaning                                        |
 | -------------------- | ---------------------------------------------- |
