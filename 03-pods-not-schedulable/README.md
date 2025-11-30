@@ -53,6 +53,7 @@ Node Affinity helps you control Pod placement when you want pods to run on a spe
   - If no matching node exists → Pod stays pending
 - Example:
   - "Only run on nodes labeled env=prod."  
+  
 **2️⃣ PreferredDuringSchedulingIgnoredDuringExecution**
 - Soft rule
   - Scheduler tries to place Pod on preferred nodes but can fall back to other nodes if the no node with that label is present
