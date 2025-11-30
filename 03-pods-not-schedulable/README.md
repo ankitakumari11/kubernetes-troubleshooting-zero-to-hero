@@ -82,7 +82,7 @@ This means:
 > - So u dont need to do anything in the yaml of pods , the **taint** command just restricted all the pods formation on it unless and until u add **tolerations** inisde the yaml of that particular deployment or pod.
 > - That taint says: “Do NOT schedule any pod here unless it has a matching toleration.”  
 
-**🔹 Taint Effects&=**
+**🔹 Taint Effects**
 | Effect               | Meaning                                        |
 | -------------------- | ---------------------------------------------- |
 | **NoSchedule**       | Pods without toleration **won't be scheduled**. Scheduler will not place new Pods on this node unless they have matching toleration. |
