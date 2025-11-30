@@ -71,7 +71,7 @@ Taints are applied to nodes to repel certain pods. They allow nodes to refuse po
 Usage: Use kubectl taint command to apply taints to nodes. Include tolerations field in the pod's YAML definition to tolerate specific taints.
 
 ```
-kubectl taint nodes node1 disktype=ssd:NoSchedule
+kubectl taint nodes node1 node-name=arm-worker:NoSchedule
 ```
 This means:  
 > *Do NOT schedule pods on this node unless they tolerate this taint*
@@ -81,16 +81,16 @@ spec:
     - name: my-app
     image: my-image
     tolerations:
-    - key: disktype
+    - key: node-name
       operator: Equal
-      value: ssd
+      value: arm-worker
       effect: NoSchedule
 ```
 For example: There are 2 nodes in a cluster and u want to upgrade them so u will do one by one , u will shift all the pods to the other nodes and then apply Noschedule rule for that particular pod and bring it down , upgrade it and then now ur node is ready and similarily u can do for other nodes too.  
 **🔹 Taint Effects&=**
 | Effect               | Meaning                                        |
 | -------------------- | ---------------------------------------------- |
-| **NoSchedule**       | Pods without toleration **won't be scheduled**Scheduler will not place new Pods on this node unless they have matching toleration. |
+| **NoSchedule**       | Pods without toleration **won't be scheduled**. Scheduler will not place new Pods on this node unless they have matching toleration. |
 | **PreferNoSchedule** | Try not to schedule, but not strict            |
 | **NoExecute**        | Evicts running pods without toleration         |
 
