@@ -48,7 +48,7 @@ Node Affinity helps you control Pod placement when you want pods to run on a spe
   - Scheduler tries to place Pod on preferred nodes but can fall back to other nodes
   - Pod will still run even if no nodes match
 - Example:
-  - "Prefer to run on env=prod nodes, but run anywhere if not available."
+  - "Prefer to run on env=prod nodes, but run anywhere if not available."  
 👉 In short:  
 - Node Selector = simple + strict
 - Node Affinity = flexible + supports soft & hard rules
