@@ -41,7 +41,8 @@ mypod-1 → pvc-mypod-1
   - Even if a node crashes or pod restarts, Kubernetes ensures:
     - Same pod name
     - Same hostname
-    - Same volume  
+    - Same volume
+  
 | Feature        | Deployment     | StatefulSet           |
 | -------------- | -------------- | --------------------- |
 | Pod Names      | Random         | Fixed (pod-0, pod-1…) |
