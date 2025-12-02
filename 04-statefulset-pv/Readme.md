@@ -1,4 +1,4 @@
-### stateful and stateless application
+### 📌 Stateful and Stateless application
 A stateful application remembers past interactions, storing session data on the server to process future requests. A stateless application treats each request as an independent transaction, with all necessary information contained within the request itself, often using client-side data like cookies. This makes stateless applications easier to scale and deploy across different servers, while stateful applications require more complex management to maintain user session continuity across a distributed system.  
 
 ### 📌 What is a StatefulSet in Kubernetes?
@@ -130,6 +130,13 @@ spec:
   
 <img width="906" height="407" alt="image" src="https://github.com/user-attachments/assets/211f969a-f209-42c5-9c12-528fe851c430" />
 
+### CSI driver  
+
+A CSI (Container Storage Interface) driver is a plugin that allows Kubernetes to connect to and provision storage from a storage system — whether it’s cloud storage (EBS, EFS) or external storage (NetApp, Dell EMC, etc.).  
+
+Here we used the native storage services and providers like for aws , it's ebs, efs etc. But what if we want an external storage like Netapp. Now these external storage provides their own CSI ( Container storage Interface ) drivers which we need to install on our eks or any other cluster using helm or their official documentation. This driver will act as a storage provisioner or talk to the provisioner to create the external storage.The CSI driver lets Kubernetes talk to that storage system and dynamically create volumes using a StorageClass.External storage vendors provide their own StorageClasses along with their CSI driver.
+
+<img width="728" height="56" alt="image" src="https://github.com/user-attachments/assets/dda8cdb7-9ffb-41f2-a633-5272829151c8" />
 
 
 
