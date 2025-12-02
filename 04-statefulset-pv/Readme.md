@@ -52,3 +52,82 @@ mypod-1 → pvc-mypod-1
 | Shutdown Order | Not guaranteed | Guaranteed (reverse)  |
 | Use Case       | Stateless apps | Stateful apps         |
 | Examples       | Web apps, APIs | DBs, Kafka, Zookeeper |
+
+## StatefulSet with Persistent Volume not working after Cloud Migration | How to fix it ?  
+
+**Scenario**
+- There's a developer who wrote a statefulset menifest file for his database application.
+- That yml file ran successfully on aws cloud provider and pods were running successfully.
+- But when he tried to run it on Minikube or GCP or Azure, he faced issue as the pods were not coming up.
+```
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: web
+spec:
+  selector:
+    matchLabels:
+      app: nginx
+  serviceName: "nginx"
+  replicas: 3
+  minReadySeconds: 10
+  template:
+    metadata:
+      labels:
+        app: nginx
+    spec:
+      terminationGracePeriodSeconds: 10
+      containers:
+      - name: nginx
+        image: registry.k8s.io/nginx-slim:0.8
+        ports:
+        - containerPort: 80
+          name: web
+        volumeMounts:
+        - name: www
+          mountPath: /usr/share/nginx/html
+  volumeClaimTemplates:
+  - metadata:
+      name: www
+    spec:
+      accessModes: [ "ReadWriteOnce" ]
+      storageClassName: ebs
+      resources:
+        requests:
+          storage: 1Gi
+```
+<img width="769" height="179" alt="image" src="https://github.com/user-attachments/assets/526cb6e6-7b45-4af8-b261-18f973b29c9d" />
+- Now here u can see , we had written 3 replicas but it;s showing only 1 becoz in statefulsets once the 1st replica gets created then 2nd starts then 3rd and so on unlike deployments.
+<img width="963" height="299" alt="image" src="https://github.com/user-attachments/assets/baec3d94-ea7f-4509-b776-88b1e56ee694" />
+- Here the issue is regarding Persistent Volume.
+- See the flow below , what actually happens when we ask for volume as mentioned in the yml.
+- **StorageClass** in Kubernetes tells the cluster what type of storage to create (fast, slow, SSD, etc.) and automatically provisions PersistentVolumes when a PVC asks for storage.  
+<img width="874" height="70" alt="image" src="https://github.com/user-attachments/assets/32d839f3-3b5c-44c0-9af9-7efe6714979d" />
+- Now ebs storage class maybe there on aws but here on minikube there's no storage class named **ebs**
+<img width="872" height="210" alt="image" src="https://github.com/user-attachments/assets/f5cd293c-6bb3-4038-babf-a50ae8ada798" />
+- On aws the flow maybe:
+<img width="760" height="77" alt="image" src="https://github.com/user-attachments/assets/2a8f4136-528a-4f63-af3c-5293065b7c24" />
+- Now here on Minikube the flow would be:
+<img width="761" height="89" alt="image" src="https://github.com/user-attachments/assets/52941813-831e-4bd3-aa35-786ac4c171bd" />
+- So go to the yaml file and change the storage class name to **standard**.
+<img width="721" height="480" alt="image" src="https://github.com/user-attachments/assets/8106df0a-165f-46d4-b0c6-a4f9932bef57" />
+
+<img width="578" height="76" alt="image" src="https://github.com/user-attachments/assets/a2d1f7c0-fd67-49a8-b08e-182e0ec664c6" />  
+
+<img width="947" height="94" alt="image" src="https://github.com/user-attachments/assets/52ba4dc6-1701-4243-b745-626f90a44698" />  
+
+<img width="644" height="205" alt="image" src="https://github.com/user-attachments/assets/d0e1b0dd-51d5-4ec9-a50b-9e537cfdd4dd" />  
+- We also need to delete the exisitng PVC. So delete it and again deploy.
+
+<img width="636" height="127" alt="image" src="https://github.com/user-attachments/assets/1501edfe-892a-4816-8199-a7412868a9c2" />
+
+<img width="374" height="213" alt="image" src="https://github.com/user-attachments/assets/486b851e-47d7-4030-bec6-5bdf7f573f71" />
+
+
+
+
+ 
+
+
+
+
