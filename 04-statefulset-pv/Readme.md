@@ -19,7 +19,7 @@ A Deployment is great for stateless apps, but it does NOT guarantee:
 
 **🧱 Key Features of StatefulSet**
 - 1️⃣ Stable, unique pod names : Pod names follow a predictable format.
-- Even if pod 0 is deleted, it comes back as mypod-0, never as a random name.
+  - Even if pod 0 is deleted, it comes back as mypod-0, never as a random name.
 ```
 mypod-0
 mypod-1
@@ -41,7 +41,7 @@ mypod-1 → pvc-mypod-1
   - Even if a node crashes or pod restarts, Kubernetes ensures:
     - Same pod name
     - Same hostname
-    - Same volume
+    - Same volume  
 | Feature        | Deployment     | StatefulSet           |
 | -------------- | -------------- | --------------------- |
 | Pod Names      | Random         | Fixed (pod-0, pod-1…) |
