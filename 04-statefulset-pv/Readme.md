@@ -126,9 +126,8 @@ spec:
   
 - We also need to delete the exisitng PVC. So delete it and again deploy.
 
-<img width="958" height="181" alt="image" src="https://github.com/user-attachments/assets/32cd9345-22e6-43f7-a6cd-d3a34fd24b18" />
-
-
+<img width="958" height="181" alt="image" src="https://github.com/user-attachments/assets/8efc8619-33b7-428a-95a8-57dcf542f4a0" />
+  
 <img width="906" height="407" alt="image" src="https://github.com/user-attachments/assets/211f969a-f209-42c5-9c12-528fe851c430" />
 
 
