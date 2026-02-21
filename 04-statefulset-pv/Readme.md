@@ -127,7 +127,7 @@ spec:
 
 <img width="644" height="205" alt="image" src="https://github.com/user-attachments/assets/d0e1b0dd-51d5-4ec9-a50b-9e537cfdd4dd" />  
   
-- We also need to delete the exisitng PVC. So delete it and again deploy.
+- We also need to delete the exisitng PVC. So delete it and again deploy. becoz when stateful sets are deleted (pods) and recreated then the stateful sets tries to attach the same pvc due to which we having the same error.
 
 <img width="958" height="181" alt="image" src="https://github.com/user-attachments/assets/8efc8619-33b7-428a-95a8-57dcf542f4a0" />
   
