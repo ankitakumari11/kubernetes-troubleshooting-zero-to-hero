@@ -53,6 +53,7 @@ mypod-1 → pvc-mypod-1
 | Use Case       | Stateless apps | Stateful apps         |
 | Examples       | Web apps, APIs | DBs, Kafka, Zookeeper |
 
+
 ## StatefulSet with Persistent Volume not working after Cloud Migration | How to fix it ?  
 
 **Scenario**
