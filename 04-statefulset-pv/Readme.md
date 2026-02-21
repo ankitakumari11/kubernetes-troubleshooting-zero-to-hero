@@ -104,8 +104,8 @@ spec:
   
 - Here the issue is regarding Persistent Volume.
 - See the flow below , what actually happens when we ask for volume as mentioned in the yml.
-- **StorageClass** in Kubernetes tells the cluster what type of storage to create (fast, slow, SSD, etc.) and automatically provisions PersistentVolumes when a PVC asks for storage.
-- **Provisioner** : It acts as a plugin connecting the cluster to storage infrastructure (e.g., AWS EBS, NFS, CSI drivers), enabling dynamic storage  
+- **StorageClass** in Kubernetes tells the cluster what type of storage to create (fast, slow, SSD, etc.) and automatically provisions PersistentVolumes when a PVC asks for storage. Storage class asks appropriate provisioner to create PV
+- **Provisioner** : It acts as a plugin connecting the cluster to storage infrastructure (e.g., AWS EBS, NFS, CSI drivers), enabling dynamic storage. Provisioner is the one which creates PV dynamically. 
 <img width="874" height="70" alt="image" src="https://github.com/user-attachments/assets/32d839f3-3b5c-44c0-9af9-7efe6714979d" />
   
 - Now ebs storage class maybe there on aws but here on minikube there's no storage class named **ebs**
