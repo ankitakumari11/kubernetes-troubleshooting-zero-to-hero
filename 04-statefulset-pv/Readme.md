@@ -107,21 +107,22 @@ spec:
 - **StorageClass** in Kubernetes tells the cluster what type of storage to create (fast, slow, SSD, etc.) and automatically provisions PersistentVolumes when a PVC asks for storage. Storage class asks appropriate provisioner to create PV
 - **Provisioner** : It acts as a plugin connecting the cluster to storage infrastructure (e.g., AWS EBS, NFS, CSI drivers), enabling dynamic storage. Provisioner is the one which creates PV dynamically. 
 <img width="874" height="70" alt="image" src="https://github.com/user-attachments/assets/32d839f3-3b5c-44c0-9af9-7efe6714979d" />
-  
-- Now ebs storage class maybe there on aws but here on minikube there's no storage class named **ebs**
-<img width="872" height="210" alt="image" src="https://github.com/user-attachments/assets/f5cd293c-6bb3-4038-babf-a50ae8ada798" />
-  
+
 - On aws the flow maybe:
 <img width="760" height="77" alt="image" src="https://github.com/user-attachments/assets/2a8f4136-528a-4f63-af3c-5293065b7c24" />
   
+- Now ebs storage class maybe there on aws but here on minikube there's no storage class named **ebs**
+<img width="872" height="210" alt="image" src="https://github.com/user-attachments/assets/f5cd293c-6bb3-4038-babf-a50ae8ada798" />
+    
 - Now here on Minikube the flow would be:
 <img width="761" height="89" alt="image" src="https://github.com/user-attachments/assets/52941813-831e-4bd3-aa35-786ac4c171bd" />
   
-- So go to the yaml file and change the storage class name to **standard**.
-<img width="721" height="480" alt="image" src="https://github.com/user-attachments/assets/8106df0a-165f-46d4-b0c6-a4f9932bef57" />
+- In the statefulset yaml file , storage class written was ebs and since ebs is not available here at minikube that's y it is showing that PVC error so 1st delete that statefulset and then go to the yml and change the storage class name to **standard**.
 
 <img width="578" height="76" alt="image" src="https://github.com/user-attachments/assets/a2d1f7c0-fd67-49a8-b08e-182e0ec664c6" />  
-
+  
+<img width="721" height="480" alt="image" src="https://github.com/user-attachments/assets/8106df0a-165f-46d4-b0c6-a4f9932bef57" />
+  
 <img width="947" height="94" alt="image" src="https://github.com/user-attachments/assets/52ba4dc6-1701-4243-b745-626f90a44698" />  
 
 <img width="644" height="205" alt="image" src="https://github.com/user-attachments/assets/d0e1b0dd-51d5-4ec9-a50b-9e537cfdd4dd" />  
